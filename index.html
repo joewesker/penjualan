@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Pribadi - Joe Wesker</title>
+    
+    <style>
+        /* ============================================================
+           1. RESET & GENERAL STYLES
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #09070f;
+            color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================================
+           2. HEADER / NAVBAR
+           ============================================================ */
+        .header {
+            background-color: rgba(16, 10, 28, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #231838;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #a855f7;
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: #a855f7;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+        }
+
+        /* ============================================================
+           3. HERO SECTION (FOTO & BIOGRAFI SINGKAT)
+           ============================================================ */
+        .profile-hero {
+            padding: 60px 0 40px;
+            background: radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.12), transparent 70%);
+            text-align: center;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .foto-profil {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #a855f7;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+            display: block;
+        }
+
+        .profile-hero h1 {
+            font-size: 32px;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-hero .subtitle {
+            color: #c084fc;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .bio-text {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        /* ============================================================
+           4. DATA DIRI & INFORMASI DETAIL
+           ============================================================ */
+        .info-section {
+            padding: 40px 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(19, 13, 34, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid #2d1f47;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #231838;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 span {
+            color: #a855f7;
+        }
+
+        .detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .detail-item .label {
+            color: #94a3b8;
+        }
+
+        .detail-item .value {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        /* Skill Bars */
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #1e1530;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #6b21a8);
+            border-radius: 10px;
+        }
+
+        /* Badges Hobi */
+        .hobby-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hobby-badge {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #d8b4fe;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Sosmed Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background: #1e1530;
+            color: #f1f5f9;
+            border: 1px solid #2d1f47;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-social.btn-instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-color: #dc2743;
+            box-shadow: 0 0 15px rgba(220, 39, 67, 0.6);
+        }
+
+        /* ============================================================
+           5. FOOTER
+           ============================================================ */
+        .footer {
+            background-color: #06040a;
+            color: #64748b;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 13px;
+            border-top: 1px solid #231838;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR HEADER -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.php" class="logo">JOE<span>WESKER</span></a>
+            
+            <nav class="menu">
+               <a href="index.php">Home</a>
+               <a href="#" class="active">Profil</a>
+               <a href="index.php#produk">Katalog</a>
+               <a href="index.php#kontak">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (BIOGRAFI UTAMA) -->
+    <section class="profile-hero">
+        <div class="container">
+            <div class="avatar-wrapper">
+                <img src="images/profil.jfif" alt="Foto Profil Joe Wesker" class="foto-profil">
+            </div>
+            <h1>JOE WESKER</h1>
+            <p class="subtitle">Web Developer & Tech Enthusiast</p>
+            <p class="bio-text">
+                Halo! Saya seorang pengembang web yang berdomisili di Wonogiri. Memiliki passion tinggi dalam merancang platform digital yang modern, responsif, dan interaktif dengan estetika visual bernuansa futuristik.
+            </p>
+        </div>
+    </section>
+
+    <!-- GRID INFORMASI DETAIL -->
+    <section class="info-section">
+        <div class="container">
+            <div class="grid-container">
+                
+                <!-- CARD 1: DATA DIRI -->
+                <div class="card">
+                    <h2><span>01.</span> Data Diri</h2>
+                    <div class="detail-list">
+                        <div class="detail-item">
+                            <span class="label">Nama Lengkap</span>
+                            <span class="value">Joe Wesker</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Pekerjaan</span>
+                            <span class="value">Store Owner / Admin</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Lokasi</span>
+                            <span class="value">Wonogiri, Jawa Tengah</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Email</span>
+                            <span class="value">joewesker@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Status</span>
+                            <span class="value">Aktif / Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: KEAHLIAN / SKILLS -->
+                <div class="card">
+                    <h2><span>02.</span> Keahlian Utama</h2>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>HTML5 & CSS3 Layouting</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>PHP & Database Management</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>UI/UX & Dark Mode Design</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: HOBI & MINAT -->
+                <div class="card">
+                    <h2><span>03.</span> Minat & Hobi</h2>
+                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">
+                        Di luar kegiatan pemrograman, beberapa hal yang sering saya tekuni:
+                    </p>
+                    <div class="hobby-container">
+                        <span class="hobby-badge">E-Sports & Gaming</span>
+                        <span class="hobby-badge">Koleksi Taktis</span>
+                        <span class="hobby-badge">Desain Grafis</span>
+                        <span class="hobby-badge">Membaca Komik/Manga</span>
+                        <span class="hobby-badge">Eksplorasi Teknologi</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAUTAN MEDIA SOSIAL (HANYA INSTAGRAM) -->
+            <div class="social-links">
+                <a href="https://instagram.com/isajoee_" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Joe Wesker. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
